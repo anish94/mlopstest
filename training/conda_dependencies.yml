@@ -20,3 +20,17 @@ dependencies:
 - pandas=0.24.2
 - matplotlib=3.0.2
 - seaborn=0.9.0
+
+-f https://download.pytorch.org/whl/torch_stable.html
+- Flask==1.1.1
+- gunicorn==19.9.0
+- itsdangerous==1.1.0
+- Jinja2==2.10.1
+- MarkupSafe==1.1.1
+- Werkzeug==0.15.5
+- scipy>=0.15.1
+- scikit-learn==0.22.1
+- torch==1.6.0+cpu
+- fastai==1.0.61
+
+
