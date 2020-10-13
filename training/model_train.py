@@ -23,6 +23,7 @@ print("Loading training data...")
 datastore = ws.get_default_datastore()
 datastore_paths = [(datastore, 'latest_10052020/latest_10052020.csv')]
 traindata = Dataset.Tabular.from_delimited_files(path=datastore_paths)
+traindata.take(3).to_pandas_dataframe()
 df = traindata.to_pandas_dataframe()
 print("Columns:", df.columns) 
 print("Diabetes data set dimensions : {}".format(df.shape))
