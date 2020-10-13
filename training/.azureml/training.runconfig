@@ -25,7 +25,7 @@ history:
 dataReferences:
   workspaceblobstore:
     dataStoreName: workspaceblobstore
-    pathOnDataStore: diabetes
+    pathOnDataStore: latest_10052020
     mode: download
     overwrite: true
     pathOnCompute: 
