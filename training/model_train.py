@@ -2,6 +2,7 @@ import torch
 import pandas as pd
 import numpy as np
 import os
+from sklearn.model_selection import train_test_split
 # Reference:- https://course.fast.ai/videos/?lesson=8
 # importing fastai dependencies
 from fastai.text import TextLMDataBunch, language_model_learner, text_classifier_learner, AWD_LSTM, TextClasDataBunch, DatasetType
@@ -39,10 +40,14 @@ clean_df.loc[~clean_df["RequestType"].isin(value_list), "RequestType"] = "Second
 # Creating dataframe with only RequestType and OriginalEmailBody. To be used for modelling.
 train = pd.concat([clean_df['RequestType'], clean_df['OriginalEmailBody']], axis = 1)
 train=train[~(train.OriginalEmailBody=='')]
-train.to_csv('training-data/train.csv', index = False)
+# train.to_csv('training-data/train.csv', index = False)
+
+# split data into training and validation set
+df_trn, df_val = train_test_split(train, test_size = 0.3, random_state = 12)
 
 # Loading data with fastai TextLMDataBunch
-data_lm = TextLMDataBunch.from_csv('training-data/', 'train.csv', valid_pct = 0.25, bs = 32)
+# data_lm = TextLMDataBunch.from_csv('training-data/', 'train.csv', valid_pct = 0.25, bs = 32)
+data_lm = TextLMDataBunch.from_df(train_df = df_trn, valid_df = df_val, path = "")
 
 # Loading pretrained Wikitext103 language model in fastai
 learn = language_model_learner(data_lm, AWD_LSTM, drop_mult=0.3)
