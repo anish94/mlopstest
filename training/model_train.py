@@ -20,11 +20,12 @@ exp = run.experiment
 ws = run.experiment.workspace
 
 print("Loading training data...")
-datastore = ws.get_default_datastore()
-datastore_paths = [(datastore, 'latest_10052020/latest_10052020.csv')]
-traindata = Dataset.Tabular.from_delimited_files(path=datastore_paths)
-print(traindata.take(1).to_pandas_dataframe())
-df = traindata.to_pandas_dataframe()
+# datastore = ws.get_default_datastore()
+# datastore_paths = [(datastore, 'latest_10052020/latest_10052020.csv')]
+# traindata = Dataset.Tabular.from_delimited_files(path=datastore_paths)
+# print(traindata.take(1).to_pandas_dataframe())
+df = pd.read_csv('https://mlopstesstorageb4fc0003e.blob.core.windows.net/azureml-blobstore-31f35f7a-4684-4ed4-9b57-3163f294c8a9/latest_10052020/latest_10052020.csv?sp=r&st=2020-10-13T23:22:06Z&se=2020-10-14T07:22:06Z&spr=https&sv=2019-12-12&sr=b&sig=n8uKOFOxahucKbkw%2FfWCNTOruGoGNMgg1FYqoOSFulo%3D')
+# df = traindata.to_pandas_dataframe()
 print("Columns:", df.columns) 
 print("Diabetes data set dimensions : {}".format(df.shape))
 
