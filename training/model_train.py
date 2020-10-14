@@ -59,7 +59,11 @@ learn.unfreeze()
 # Fit using learning rate 1e-2 (This learning rate is obtained from learn.recorder.plot(skip_end=15,suggestion=True) )
 learn.fit_one_cycle(10, 1e-2, moms=(0.8,0.7))
 # Save the encoder (model trained above)
-learn.save_encoder('encoder_files/fine_tuned_enc')
+encoder_folder = './encoder_files'
+os.makedirs(encoder_folder, exist_ok=True)
+encoder_filename = "fine_tuned_enc"
+encoder_path = os.path.join(encoder_folder, encoder_filename)
+learn.save_encoder(encoder_path)
 
 # Classifier:
 # We train the 
@@ -68,7 +72,7 @@ data_clas = TextClasDataBunch.from_csv('training-data/', 'train.csv', valid_pct 
 
 # Create a model to classify those emails and load the encoder saved before.
 learn = text_classifier_learner(data_clas, AWD_LSTM, drop_mult=0.5)
-learn.load_encoder('encoder_files/fine_tuned_enc')
+learn.load_encoder(encoder_path)
 
 callbacks = SaveModelCallback(learn,monitor="accuracy", mode="max", name="best_lang_model")
 
