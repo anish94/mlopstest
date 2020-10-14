@@ -24,7 +24,7 @@ print("Loading training data...")
 # datastore_paths = [(datastore, 'latest_10052020/latest_10052020.csv')]
 # traindata = Dataset.Tabular.from_delimited_files(path=datastore_paths)
 # print(traindata.take(1).to_pandas_dataframe())
-df = pd.read_csv('https://mlopstesstorageb4fc0003e.blob.core.windows.net/azureml-blobstore-31f35f7a-4684-4ed4-9b57-3163f294c8a9/latest_10052020/latest_10052020.csv?sp=r&st=2020-10-13T23:22:06Z&se=2020-10-14T07:22:06Z&spr=https&sv=2019-12-12&sr=b&sig=n8uKOFOxahucKbkw%2FfWCNTOruGoGNMgg1FYqoOSFulo%3D')
+df = pd.read_csv('https://mlopswsestoragee95af9d45.blob.core.windows.net/azureml-blobstore-dffebbb2-d010-49e5-8d64-023ab918a731/latest_10052020/latest_10052020.csv?sp=r&st=2020-10-14T17:04:59Z&se=2020-10-15T01:04:59Z&spr=https&sv=2019-12-12&sr=b&sig=OppxbeEScaIXWS22qs57YT%2FqE7QWBukVm%2BJHA1aypxk%3D')
 # df = traindata.to_pandas_dataframe()
 print("Columns:", df.columns) 
 print("Diabetes data set dimensions : {}".format(df.shape))
