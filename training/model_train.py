@@ -63,7 +63,7 @@ encoder_folder = './encoder_files'
 os.makedirs(encoder_folder, exist_ok=True)
 encoder_filename = "fine_tuned_enc"
 encoder_path = os.path.join(encoder_folder, encoder_filename)
-learn.save_encoder(encoder_path)
+# learn.save_encoder(encoder_path)
 
 # Classifier:
 # We train the 
@@ -71,22 +71,23 @@ learn.save_encoder(encoder_path)
 data_clas = TextClasDataBunch.from_csv('training-data/', 'train.csv', valid_pct = 0.25, vocab = data_lm.vocab)
 
 # Create a model to classify those emails and load the encoder saved before.
-learn = text_classifier_learner(data_clas, AWD_LSTM, drop_mult=0.5)
-learn.load_encoder(encoder_path)
+learn2 = text_classifier_learner(data_clas, AWD_LSTM, drop_mult=0.5)
+# learn.load_encoder(encoder_path)
+learn2.load_encoder(learn)
 
-callbacks = SaveModelCallback(learn,monitor="accuracy", mode="max", name="best_lang_model")
+callbacks = SaveModelCallback(learn2,monitor="accuracy", mode="max", name="best_lang_model")
 
 # Train the model
-learn.fit_one_cycle(1, 1e-2, moms=(0.8,0.7))
+learn2.fit_one_cycle(1, 1e-2, moms=(0.8,0.7))
 
-learn.freeze_to(-2)
-learn.fit_one_cycle(1, slice(1e-2/(2.6**4),1e-2), moms=(0.8,0.7))
+learn2.freeze_to(-2)
+learn2.fit_one_cycle(1, slice(1e-2/(2.6**4),1e-2), moms=(0.8,0.7))
 
-learn.freeze_to(-3)
-learn.fit_one_cycle(1, slice(5e-3/(2.6**4),5e-3), moms=(0.8,0.7))
+learn2.freeze_to(-3)
+learn2.fit_one_cycle(1, slice(5e-3/(2.6**4),5e-3), moms=(0.8,0.7))
 
-learn.unfreeze()
-learn.fit_one_cycle(15, slice(1e-3/(2.6**4),1e-3), moms=(0.8,0.7), callbacks=[callbacks])
+learn2.unfreeze()
+learn2.fit_one_cycle(15, slice(1e-3/(2.6**4),1e-3), moms=(0.8,0.7), callbacks=[callbacks])
 
 # Save Final model
 # learn.export(file = 'nlp-lang-1.pkl')
@@ -98,7 +99,7 @@ os.makedirs(outputs_folder, exist_ok=True)
 
 model_filename = "nlp-lang-1.pkl"
 model_path = os.path.join(outputs_folder, model_filename)
-learn.save(model_path)
+learn2.save(model_path)
 
 # upload the model file explicitly into artifacts
 print("Uploading the model into run artifacts...")
