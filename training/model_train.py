@@ -20,7 +20,7 @@ exp = run.experiment
 ws = run.experiment.workspace
 
 print("Loading training data...")
-print(cwd = os.getcwd())
+print(os.getcwd())
 # datastore = ws.get_default_datastore()
 # datastore_paths = [(datastore, 'latest_10052020/latest_10052020.csv')]
 # traindata = Dataset.Tabular.from_delimited_files(path=datastore_paths)
