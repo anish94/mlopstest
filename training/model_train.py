@@ -24,7 +24,7 @@ print("Loading training data...")
 # datastore_paths = [(datastore, 'latest_10052020/latest_10052020.csv')]
 # traindata = Dataset.Tabular.from_delimited_files(path=datastore_paths)
 # print(traindata.take(1).to_pandas_dataframe())
-df = pd.read_csv('https://mlopswsestoragee95af9d45.blob.core.windows.net/azureml-blobstore-dffebbb2-d010-49e5-8d64-023ab918a731/latest_10052020/latest_10052020.csv?sp=r&st=2020-10-15T03:56:02Z&se=2020-10-15T11:56:02Z&spr=https&sv=2019-12-12&sr=b&sig=tVeGorlTpZ6lIX3FC9%2F%2FeVfpBBz3PhyHJijV5sVELB0%3D')
+df = pd.read_csv('https://mlopswsestoragee95af9d45.blob.core.windows.net/azureml-blobstore-dffebbb2-d010-49e5-8d64-023ab918a731/latest_10052020/latest_10052020.csv?sp=r&st=2020-10-16T01:08:16Z&se=2020-10-16T09:08:16Z&spr=https&sv=2019-12-12&sr=b&sig=yrPiQv5%2FOI8mWUL5ymx2p%2Bz9RWQTkJw8beR4hAiQknk%3D')
 # df = pd.read_csv('./workspaceblobstore/latest_10052020/latest_10052020.csv')
 # df = traindata.to_pandas_dataframe()
 print("Columns:", df.columns) 
