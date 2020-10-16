@@ -69,7 +69,8 @@ encoder_path = os.path.join(encoder_folder, encoder_filename)
 # Classifier:
 # We train the 
 # Create a new data object that only grabs the labelled data and keeps those labels:-
-data_clas = TextClasDataBunch.from_csv('training-data/', 'train.csv', valid_pct = 0.25, vocab = data_lm.vocab)
+# data_clas = TextClasDataBunch.from_csv('training-data/', 'train.csv', valid_pct = 0.25, vocab = data_lm.vocab)
+data_clas = TextClasDataBunch.from_df(path=".", train_df=df_trn, valid_df=df_val, vocab = data_lm.vocab)
 
 # Create a model to classify those emails and load the encoder saved before.
 learn2 = text_classifier_learner(data_clas, AWD_LSTM, drop_mult=0.5)
