@@ -20,6 +20,7 @@ exp = run.experiment
 ws = run.experiment.workspace
 
 print("Loading training data...")
+print(cwd = os.getcwd())
 # datastore = ws.get_default_datastore()
 # datastore_paths = [(datastore, 'latest_10052020/latest_10052020.csv')]
 # traindata = Dataset.Tabular.from_delimited_files(path=datastore_paths)
@@ -58,13 +59,14 @@ learn = language_model_learner(data_lm, AWD_LSTM, drop_mult=0.3)
 # Unfreeze the weights and biases to fine tune the model using our corpus
 learn.unfreeze()
 # Fit using learning rate 1e-2 (This learning rate is obtained from learn.recorder.plot(skip_end=15,suggestion=True) )
-learn.fit_one_cycle(10, 1e-2, moms=(0.8,0.7))
+# learn.fit_one_cycle(10, 1e-2, moms=(0.8,0.7))
+learn.fit_one_cycle(1, 1e-2, moms=(0.8,0.7))
 # Save the encoder (model trained above)
 encoder_folder = './encoder_files'
 os.makedirs(encoder_folder, exist_ok=True)
 encoder_filename = "fine_tuned_enc"
 encoder_path = os.path.join(encoder_folder, encoder_filename)
-# learn.save_encoder(encoder_path)
+learn.save_encoder(encoder_path)
 
 # Classifier:
 # We train the 
@@ -74,8 +76,8 @@ data_clas = TextClasDataBunch.from_df(path=".", train_df=df_trn, valid_df=df_val
 
 # Create a model to classify those emails and load the encoder saved before.
 learn2 = text_classifier_learner(data_clas, AWD_LSTM, drop_mult=0.5)
-# learn.load_encoder(encoder_path)
-learn2.load_encoder(learn)
+learn2.load_encoder(encoder_path)
+
 
 callbacks = SaveModelCallback(learn2,monitor="accuracy", mode="max", name="best_lang_model")
 
