@@ -66,7 +66,8 @@ encoder_folder = './encoder_files'
 os.makedirs(encoder_folder, exist_ok=True)
 encoder_filename = "fine_tuned_enc"
 encoder_path = os.path.join(encoder_folder, encoder_filename)
-learn.save_encoder(encoder_path)
+# learn.save_encoder(encoder_path)
+learn.save_encoder(name='abc')
 
 # Classifier:
 # We train the 
@@ -76,7 +77,7 @@ data_clas = TextClasDataBunch.from_df(path=".", train_df=df_trn, valid_df=df_val
 
 # Create a model to classify those emails and load the encoder saved before.
 learn2 = text_classifier_learner(data_clas, AWD_LSTM, drop_mult=0.5)
-learn2.load_encoder(encoder_path)
+learn2.load_encoder(name='abc')
 
 
 callbacks = SaveModelCallback(learn2,monitor="accuracy", mode="max", name="best_lang_model")
