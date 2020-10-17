@@ -104,11 +104,13 @@ os.makedirs(outputs_folder, exist_ok=True)
 
 model_filename = "nlp-lang-1.pkl"
 model_path = os.path.join(outputs_folder, model_filename)
-learn2.save(model_path)
+# learn2.save(model_path)
+learn2.export(file = 'nlp-lang-1.pkl')
 
 # upload the model file explicitly into artifacts
 print("Uploading the model into run artifacts...")
-run.upload_file(name="./outputs/models/" + model_filename, path_or_stream=model_path)
+# run.upload_file(name="./outputs/models/" + model_filename, path_or_stream=model_path)
+run.upload_file(name="./outputs/models/" + model_filename, path_or_stream='nlp-lang-1.pkl')
 print("Uploaded the model {} to experiment {}".format(model_filename, run.experiment.name))
 dirpath = os.getcwd()
 print(dirpath)
