@@ -92,7 +92,7 @@ learn2.freeze_to(-3)
 learn2.fit_one_cycle(1, slice(5e-3/(2.6**4),5e-3), moms=(0.8,0.7))
 
 learn2.unfreeze()
-learn2.fit_one_cycle(15, slice(1e-3/(2.6**4),1e-3), moms=(0.8,0.7), callbacks=[callbacks])
+learn2.fit_one_cycle(1, slice(1e-3/(2.6**4),1e-3), moms=(0.8,0.7), callbacks=[callbacks])
 
 # Save Final model
 # learn.export(file = 'nlp-lang-1.pkl')
