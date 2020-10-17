@@ -13,7 +13,7 @@ def init():
     global model
 
     print ("model initialized" + time.strftime("%H:%M:%S"))
-    model_path = Model.get_model_path(model_name = 'diabetes_model')
+    model_path = Model.get_model_path(model_name = 'saps_classification')
     model = load(model_path)
     
 def run(raw_data):
