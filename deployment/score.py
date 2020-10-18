@@ -46,14 +46,15 @@ app=Flask(__name__)
 from azureml.core.model import Model
 #from azureml.monitoring import ModelDataCollector
 
-def init():
-    global model
+# def init():
+#     global model
 
-    print ("model initialized" + time.strftime("%H:%M:%S"))
-    model_path = Model.get_model_path(model_name = 'saps_classification')
-#     model = load(model_path)
-    learn = load_learner(model_path,'nlp-lang-1.pkl')
+#     print ("model initialized" + time.strftime("%H:%M:%S"))
+#     model_path = Model.get_model_path(model_name = 'saps_classification')
+# #     model = load(model_path)
+#     learn = load_learner(model_path,'nlp-lang-1.pkl')
 
+model_path = Model.get_model_path(model_name = 'saps_classification')
 # Load fastai model trained using model_train.py
 learn = load_learner(model_path,'nlp-lang-1.pkl')
 
