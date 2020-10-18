@@ -138,7 +138,7 @@ from azureml.core.model import Model
 
 model_path = Model.get_model_path(model_name = 'saps_classification')
 # Load fastai model trained using model_train.py
-learn = load_learner(model_path,'nlp-lang-1.pkl')
+learn = load_learner(model_path,'')
 
 @app.route('/')
 def welcome():
