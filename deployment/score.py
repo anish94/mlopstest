@@ -303,8 +303,9 @@ def run(raw_data):
         learn.data.add_test(data)
         result = learn.get_preds(ds_type=DatasetType.Test, ordered=True)
 #         result = model.predict(data)
-        return result
-#         return json.dumps({"result": result})
+        result = result[0].numpy().tolist()[0]
+#         return result
+        return json.dumps({"result": result})
     except Exception as e:
         result = str(e)
         return json.dumps({"error": result})
